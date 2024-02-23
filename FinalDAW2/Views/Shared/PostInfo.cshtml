@@ -1,20 +1,55 @@
 ﻿@model FinalDAW2.Models.Post
 
+@{
+    // Calculăm diferența de timp între data curentă și data postării
+    TimeSpan diferențaDeTimp = DateTime.Now - Model.DataPostarii;
+    string timpTrecut;
 
-<div class="card-body">
+    if (diferențaDeTimp.TotalMinutes < 1)
+    {
+        // Afisăm câte minute au trecut
+        timpTrecut = $"acum";
+    }
+    if (diferențaDeTimp.TotalMinutes == 1)
+    {
+        // Afisăm câte minute au trecut
+        timpTrecut = $"acum 1 minut";
+    }
+    else if (diferențaDeTimp.TotalMinutes < 60)
+    {
+        // Afisăm câte minute au trecut
+        timpTrecut = $"acum {diferențaDeTimp.Minutes} minute";
+    }
+    else if (diferențaDeTimp.TotalHours < 24)
+    {
+        // Afisăm câte ore au trecut
+        timpTrecut = $"acum {diferențaDeTimp.Hours} ore";
+    }
+    else if (diferențaDeTimp.TotalHours < 48)
+    {
+        // Afisăm câte ore au trecut
+        timpTrecut = $"ieri";
+    }
+    else if (diferențaDeTimp.TotalHours < 72)
+    {
+        // Afisăm câte ore au trecut
+        timpTrecut = $"alaltaieri";
+    }
+    else
+    {
+        // Afisăm câte zile au trecut
+        timpTrecut = $"acum {diferențaDeTimp.Days} zile";
+    }
+}
 
-
-    <div class="card-text">@Model.Continut</div>
-
-    <div class="d-flex justify-content-between flex-row mt-5">
-
-
-        <div><i class="bi bi-person"></i> @Model.User.UserName</div>
-
-        <span class="alert-success">@Model.DataPostarii</span>
-
+<div class="card">
+    <div class="card-body">
+        <p class="card-text">@Model.Continut</p>
+        <div class="post-details d-flex justify-content-between align-items-center mt-3">
+            <div class="user-info">
+                <i class="bi bi-person"></i> <strong>@Model.User.UserName</strong>
+            </div>
+            <div class="post-date alert-success">@timpTrecut</div>
+        </div>
     </div>
-
 </div>
-
-

@@ -173,6 +173,7 @@ namespace FinalDAW2.Controllers
             var user = db.Users
                          .Include("Posts")
                          .Include("Comments")
+                         .Include("ApplicationUserGroups")
                          .Where(u => u.Id == id)
                          .First();
 
@@ -195,6 +196,15 @@ namespace FinalDAW2.Controllers
                     db.Posts.Remove(article);
                 }
             }
+
+            if (user.ApplicationUserGroups.Count > 0)
+            {
+                foreach (var userGroup in user.ApplicationUserGroups)
+                {
+                    db.ApplicationUserGroups.Remove(userGroup);
+                }
+            }
+
 
             db.ApplicationUsers.Remove(user);
             db.SaveChanges();

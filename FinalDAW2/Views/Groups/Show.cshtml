@@ -9,9 +9,6 @@
                 <dt class="col-sm-3">Nume Grup:</dt>
                 <dd class="col-sm-9">@Model.Name</dd>
 
-                <dt class="col-sm-3">ID GRUP:</dt>
-                <dd class="col-sm-9">@Model.Id</dd>
-
                 <dt class="col-sm-3">Data Creării:</dt>
                 <dd class="col-sm-9">@Model.CreatedDate</dd>
 
@@ -24,7 +21,7 @@
 
 <div class="text-center mt-3">
     @if (!(bool)ViewBag.IsUserInGroup)
-    {
+    {   // buton intrat in grup
         <form method="post" asp-action="JoinGroup" asp-controller="Groups" asp-route-groupId="@Model.Id">
             <button type="submit" class="btn btn-primary mx-auto">Intră în Grup</button>
         </form>

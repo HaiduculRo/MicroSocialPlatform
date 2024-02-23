@@ -11,20 +11,27 @@
             @using (Html.BeginForm(actionName: "New", controllerName: "Posts",
             method: FormMethod.Post))
             {
-                   <input type="hidden" name="GroupId" value="@Model.GroupId">
+                <input type="hidden" name="GroupId" value="@Model.GroupId">
 
                 @Html.ValidationMessage("Continut", null, new { @class = "text-danger" })
                 @Html.Label("Continut")
                 <br />
-                @Html.TextArea("Continut", null, new { @class = "form-control" })
+                @Html.TextArea("Continut", null, new { @class = "form-control", placeholder = "La ce te gandesti azi?" })
 
                 <br />
 
                 <br />
 
+                <div class="d-flex justify-content-center">
+                    <!-- Butonul "Adauga postare" -->
+                    <button class="btn btn-success mr-2" type="submit">Adauga postare</button>
 
+                    <!-- Spatiu de 10% între butoane -->
+                    <div style="width: 10%;"></div>
 
-                <button class="btn btn-success" type="submit">Adauga postare</button>
+                    <!-- Butonul "Sterge" -->
+                    <button class="btn btn-danger ml-2" type="button" id="clearText">Sterge</button>
+                </div>
 
             }
 
@@ -32,4 +39,9 @@
     </div>
 </div>
 
-
+<!-- Script pentru ștergerea textului din caseta de text -->
+<script>
+    document.getElementById('clearText').addEventListener('click', function() {
+        document.getElementsByName('Continut')[0].value = '';
+    });
+</script>

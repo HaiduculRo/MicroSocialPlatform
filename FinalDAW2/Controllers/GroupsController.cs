@@ -52,10 +52,22 @@ namespace ProiectDAW.Controllers
             if (ModelState.IsValid)
             {
                 db.Groups.Add(group);
+                //db.ApplicationUserGroups.Add(g)
                 db.SaveChanges();
-                TempData["message"] = "Grupul a fost creat";
+
+                var currentUserId = _userManager.GetUserId(User);
+                var userGroup = new ApplicationUserGroup
+                {
+                    UserId = currentUserId,
+                    GroupId = group.Id 
+                };
+                db.ApplicationUserGroups.Add(userGroup);
+                db.SaveChanges();
+
+                TempData["message"] = "Grupul a fost creat și te-ai alăturat automat!";
                 TempData["messageType"] = "alert-success";
                 return RedirectToAction("Index");
+
             }
             else
             {

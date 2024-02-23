@@ -12,24 +12,39 @@
             {
 
                 <br />
-                @Html.LabelFor(model => model.Name, "Nume Grup")
-                <br />
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Nume Grup <3"})
 
                 @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
                 <br />
 
-                @Html.LabelFor(model => model.Descriere, "Descriere Grup")
                 <br />
-                @Html.TextAreaFor(model => model.Descriere, new { @class = "form-control" })
+                @Html.TextAreaFor(model => model.Descriere, new { @class = "form-control", placeholder = "Cateva cuvinte despre acest grup"})
 
                 @Html.ValidationMessageFor(model => model.Descriere, null, new { @class = "text-danger" })
                 <br />
 
-                <button class="btn btn-success" type="submit">Creează Grup</button>
+                <div class="d-flex justify-content-center">
+                    <!-- Butonul "Adauga Grup" -->
+                    <button class="btn btn-success mr-2" type="submit">Adauga Grup</button>
+
+                    <!-- Spatiu de 10% între butoane -->
+                    <div style="width: 10%;"></div>
+
+                    <!-- Butonul "Sterge Date" -->
+                    <button class="btn btn-danger ml-2" type="button" id="clearText">Sterge Date</button>
+                </div>
 
             }
 
         </div>
     </div>
 </div>
+
+<!-- Script pentru ștergerea textului din câmpurile de text -->
+<script>
+    document.getElementById('clearText').addEventListener('click', function () {
+        // Șterge textul din câmpurile de text
+        document.getElementById('Name').value = '';
+        document.getElementById('Descriere').value = '';
+    });
+</script>
